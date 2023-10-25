@@ -1,18 +1,22 @@
-function Option(props) {
-  const hasAnswered = props.answer !== null;
+import { useQuiz } from "../context/QuizContext";
+
+function Option() {
+  const { questions, answer, dispatch, index } = useQuiz();
+  const question = questions.at(index);
+  const hasAnswered = answer !== null;
   return (
     <div className="options">
-      {props.question.options.map((option, i) => (
+      {question.options.map((option, i) => (
         <button
           key={i}
-          className={`btn btn-option ${i === props.answer ? "answer" : ""} ${
+          className={`btn btn-option ${i === answer ? "answer" : ""} ${
             hasAnswered
-              ? i === props.question.correctOption
+              ? i === question.correctOption
                 ? "correct"
                 : "wrong"
               : ""
           }`}
-          onClick={() => props.dispatch({ type: "newAnswer", payload: i })}
+          onClick={() => dispatch({ type: "newAnswer", payload: i })}
           disabled={hasAnswered}
         >
           {option}
