@@ -89,9 +89,11 @@ function QuizProvider({ children }) {
   console.log(questions);
 
   useEffect(function () {
-    fetch("http://localhost:8000/questions")
+    fetch(
+      "https://projects-api-7aa5.onrender.com/questions/654d92a882876215634a1438"
+    )
       .then((res) => res.json())
-      .then((data) => dispatch({ type: "fetch", payload: data }))
+      .then((data) => dispatch({ type: "fetch", payload: data.questions }))
       .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);
 
